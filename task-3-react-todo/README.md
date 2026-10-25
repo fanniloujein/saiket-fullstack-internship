@@ -6,6 +6,8 @@
 >
 > 🇬🇧 **Bloom** is a React to-do list where **every completed task grows a flower** in an animated garden. The flower's colour matches the task's category.
 
+**🌐 Live demo:** https://task-3-react-todo.onrender.com/
+
 ![Bloom](screenshots/light.png)
 
 ## Requirements checklist

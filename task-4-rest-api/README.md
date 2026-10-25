@@ -6,6 +6,8 @@
 >
 > 🇬🇧 A REST API for a **User** entity (`name`, `email`, `age`) built with Node.js and Express 5. It has full CRUD, complete validation, correct HTTP status codes, a **Postman** collection (37 assertions), 15 automated tests and an "API explorer" page for testing from the browser.
 
+**🌐 Live demo:** https://npm-install-nyfu.onrender.com/
+
 ![API explorer](screenshots/explorer-create.png)
 
 ## Requirements checklist

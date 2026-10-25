@@ -6,6 +6,8 @@
 >
 > 🇬🇧 **Orbit** combines a **React** front end, an **Express** API and a **PostgreSQL** database into a user management system. Everyone can **add, view, update and delete their profile**, and administrators manage every account. **Secure login** (the optional part of the task) is included.
 
+**🌐 Live demo:** https://orbrit.onrender.com/ (demo accounts: `admin@orbit.demo` / `Demo1234`)
+
 ![Dashboard](screenshots/dashboard.png)
 
 ## Requirements checklist

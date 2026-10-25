@@ -13,6 +13,17 @@ This repository holds my work for the SaiKet Systems Full Stack Development inte
 | 5 | Database Integration | [`task-5-database-integration`](task-5-database-integration) | PostgreSQL · SQL · Express | ✅ Done |
 | 6 | Full Stack Application (User Management) | [`task-6-fullstack-app`](task-6-fullstack-app) | React · Express · PostgreSQL · auth | ✅ Done |
 
+## 🌐 Live demos
+
+| Task | Live link |
+|---|---|
+| 3 · Bloom (React) | https://task-3-react-todo.onrender.com/ |
+| 4 · Users REST API | https://npm-install-nyfu.onrender.com/ |
+| 5 · API + PostgreSQL | https://saiket-users-postgres.onrender.com/ |
+| 6 · Orbit (full stack) | https://orbrit.onrender.com/ (demo: `admin@orbit.demo` / `Demo1234`) |
+
+> Hosted on Render's free plan: the first visit can take up to a minute while the service wakes up.
+
 ## Task 1: "Rhythm of the Day" portfolio
 
 A portfolio whose theme follows the visitor's real local time (dawn, day, dusk, night), with a sun or moon moving across the sky. The site is bilingual FR/EN and responsive, and its contact form is validated in JavaScript.

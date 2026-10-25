@@ -6,6 +6,8 @@
 >
 > 🇬🇧 The Task 4 "Users" API is now connected to **PostgreSQL**. It uses **hand-written, parameterised SQL** (no ORM), database constraints, migrations and SQL statistics. The explorer page shows **the SQL executed** for every request.
 
+**🌐 Live demo:** https://saiket-users-postgres.onrender.com/
+
 ![SQL shown for a request](screenshots/explorer-select.png)
 
 ## Requirements checklist
