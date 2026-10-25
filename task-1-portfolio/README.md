@@ -13,7 +13,7 @@
 | Requirement | Where |
 |---|---|
 | Homepage | Hero section: introduction, live code card, call-to-action buttons |
-| "Projects" section with placeholders | 7 cards: 1 featured real project, this site, and 5 dashed placeholders for Tasks 2–6, with Front-end / Back-end / Full Stack filters |
+| "Projects" section with placeholders | 6 real projects (CAN Ligne Bleue, Fanni's Store, Fanni'stic, Auto-École, My Daily Hub, My Life OS), this site, and 5 dashed placeholders for Tasks 2–6, with filters: websites / apps / SaiKet internship |
 | Contact form with JavaScript validation | Name, e-mail, subject and message, validated live in vanilla JS |
 | Bootstrap or Tailwind styling | Tailwind CSS 3, compiled to `assets/css/style.css` |
 | Responsive and visually appealing | Mobile-first layout, mobile menu, tested at 390 px and 1366 px |
@@ -86,6 +86,7 @@ npx tailwindcss@3 -c tailwind.config.js -i src/input.css -o assets/css/style.css
 |---|---|---|
 | ![Night](screenshots/hero-night.png) | ![Mobile](screenshots/mobile-day.png) | ![Form](screenshots/form-validation.png) |
 
+Projects section (night): [`screenshots/projects-night.png`](screenshots/projects-night.png)  
 Full page (dusk): [`screenshots/full-page-dusk.png`](screenshots/full-page-dusk.png)
 
 ---
