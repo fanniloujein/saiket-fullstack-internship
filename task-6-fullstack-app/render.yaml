@@ -1,0 +1,30 @@
+# Render Blueprint: PostgreSQL database + one web service (Express API + React build), already connected.
+# Render → New → Blueprint → this repository → Blueprint path: task-6-fullstack-app/render.yaml
+databases:
+  - name: orbit-db
+    plan: free
+    databaseName: orbit
+    user: orbit
+
+services:
+  - type: web
+    name: orbit
+    runtime: node
+    plan: free
+    rootDir: task-6-fullstack-app
+    # --include=dev: Vite (a dev dependency) is needed to build the React app
+    buildCommand: npm install --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: orbit-db
+          property: connectionString
+      - key: DATABASE_SSL
+        value: "false"
+      # Demo accounts (password Demo1234) on an empty database; set to "false" for real use
+      - key: SEED_DEMO
+        value: "true"

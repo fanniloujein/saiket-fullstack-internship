@@ -11,7 +11,7 @@ This repository holds my work for the SaiKet Systems Full Stack Development inte
 | 3 | Front-End Framework Basics (to-do app) | [`task-3-react-todo`](task-3-react-todo) | React 19 · Vite · Vitest | ✅ Done |
 | 4 | Basic REST API (Users CRUD) | [`task-4-rest-api`](task-4-rest-api) | Node.js · Express 5 · Postman | ✅ Done |
 | 5 | Database Integration | [`task-5-database-integration`](task-5-database-integration) | PostgreSQL · SQL · Express | ✅ Done |
-| 6 | Full Stack Application (User Management) | `task-6-…` | Front-end + API + database | ⏳ Upcoming |
+| 6 | Full Stack Application (User Management) | [`task-6-fullstack-app`](task-6-fullstack-app) | React · Express · PostgreSQL · auth | ✅ Done |
 
 ## Task 1: "Rhythm of the Day" portfolio
 
@@ -53,9 +53,17 @@ The Task 4 API now stores its users in **PostgreSQL**, using hand-written, param
 
 Details: [task-5-database-integration/README.md](task-5-database-integration/README.md)
 
+## Task 6: "Orbit" full stack user management
+
+React, Express and PostgreSQL in one application. Anyone can sign up, then view, update and delete their own profile. Administrators get a dashboard (SQL statistics, activity log) and full CRUD on every user. Login is secure: scrypt hashes, HttpOnly session cookie, user/admin roles and brute-force protection. It has 18 server tests against PostgreSQL and 9 React tests.
+
+![Task 6 preview](task-6-fullstack-app/screenshots/dashboard.png)
+
+Details: [task-6-fullstack-app/README.md](task-6-fullstack-app/README.md)
+
 ## How to view
 
-Tasks 1 and 2 are static sites: open their `index.html` in a browser. Task 3 is a React app: run `npm install && npm run dev` in its folder. Task 4 is an API: run `npm install && npm start` in its folder. Task 5 needs PostgreSQL too: see its README.
+Tasks 1 and 2 are static sites: open their `index.html` in a browser. Task 3 is a React app: run `npm install && npm run dev` in its folder. Task 4 is an API: run `npm install && npm start` in its folder. Tasks 5 and 6 need PostgreSQL too: see their READMEs.
 
 Once GitHub Pages is enabled for this repository, the live version is at
 `https://fanniloujein.github.io/saiket-fullstack-internship/task-1-portfolio/`.
