@@ -1,0 +1,703 @@
+{
+  "info": {
+    "name": "SaiKet Users API",
+    "description": "CRUD tests for the User entity (SaiKet Systems, Task 4 — Loujein Fanni). Run the folders in order: the collection creates a user, reads it, updates it and deletes it.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "0. Health",
+      "item": [
+        {
+          "name": "Health check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "health"
+              ]
+            },
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"API is ok\", () => pm.expect(pm.response.json().status).to.eql(\"ok\"));",
+                  "pm.test(\"Responds in under 1 s\", () => pm.expect(pm.response.responseTime).to.be.below(1000));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "1. Create (POST)",
+      "item": [
+        {
+          "name": "Create a user",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Loujein Fanni\",\n  \"email\": \"{{uniqueEmail}}\",\n  \"age\": 25\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// A unique email each run, so the collection can be run many times",
+                  "pm.collectionVariables.set(\"uniqueEmail\", `loujein.${Date.now()}@example.com`);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 201 Created\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"Response is JSON\", () => pm.response.to.be.json);",
+                  "const user = pm.response.json().data;",
+                  "pm.test(\"Has an id, name, email, age and dates\", () => {",
+                  "  pm.expect(user).to.include.keys(\"id\", \"name\", \"email\", \"age\", \"createdAt\", \"updatedAt\");",
+                  "  pm.expect(user.age).to.be.a(\"number\");",
+                  "});",
+                  "pm.test(\"Location header points to the new user\", () => pm.expect(pm.response.headers.get(\"Location\")).to.eql(`/api/users/${user.id}`));",
+                  "pm.collectionVariables.set(\"userId\", user.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create with invalid data → 400",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"L\",\n  \"email\": \"not-an-email\",\n  \"age\": 200,\n  \"role\": \"admin\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", () => pm.response.to.have.status(400));",
+                  "const err = pm.response.json().error;",
+                  "pm.test(\"Code VALIDATION_ERROR\", () => pm.expect(err.code).to.eql(\"VALIDATION_ERROR\"));",
+                  "pm.test(\"Lists the 4 invalid fields\", () => pm.expect(err.details.map(d => d.field)).to.have.members([\"name\", \"email\", \"age\", \"role\"]));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create with missing fields → 400",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Loujein\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"email and age are required\", () => pm.expect(pm.response.json().error.details.map(d => d.field)).to.eql([\"email\", \"age\"]));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create with an existing email → 409",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Someone Else\",\n  \"email\": \"{{uniqueEmail}}\",\n  \"age\": 30\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 409 Conflict\", () => pm.response.to.have.status(409));",
+                  "pm.test(\"Code CONFLICT\", () => pm.expect(pm.response.json().error.code).to.eql(\"CONFLICT\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2. Read (GET)",
+      "item": [
+        {
+          "name": "List users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ]
+            },
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Response is JSON\", () => pm.response.to.be.json);",
+                  "const body = pm.response.json();",
+                  "pm.test(\"data is an array\", () => pm.expect(body.data).to.be.an(\"array\"));",
+                  "pm.test(\"meta has pagination info\", () => pm.expect(body.meta).to.include.keys(\"total\", \"page\", \"limit\", \"pages\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Search, filter by age and sort",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users?search=a&minAge=20&maxAge=40&sort=-age&limit=3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "a"
+                },
+                {
+                  "key": "minAge",
+                  "value": "20"
+                },
+                {
+                  "key": "maxAge",
+                  "value": "40"
+                },
+                {
+                  "key": "sort",
+                  "value": "-age"
+                },
+                {
+                  "key": "limit",
+                  "value": "3"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "const users = pm.response.json().data;",
+                  "pm.test(\"At most 3 results\", () => pm.expect(users.length).to.be.at.most(3));",
+                  "pm.test(\"Ages between 20 and 40\", () => users.forEach(u => pm.expect(u.age).to.be.within(20, 40)));",
+                  "pm.test(\"Sorted by age, oldest first\", () => {",
+                  "  for (let i = 1; i < users.length; i++) pm.expect(users[i - 1].age).to.be.at.least(users[i].age);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get the created user",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "{{userId}}"
+              ]
+            },
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Same id\", () => pm.expect(pm.response.json().data.id).to.eql(pm.collectionVariables.get(\"userId\")));",
+                  "pm.test(\"Email saved in lowercase\", () => pm.expect(pm.response.json().data.email).to.eql(pm.collectionVariables.get(\"uniqueEmail\").toLowerCase()));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Invalid query → 400",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users?limit=1000&sort=password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "1000"
+                },
+                {
+                  "key": "sort",
+                  "value": "password"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", () => pm.response.to.have.status(400));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3. Update (PUT / PATCH)",
+      "item": [
+        {
+          "name": "Replace the user (PUT)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "{{userId}}"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Loujein F.\",\n  \"email\": \"{{uniqueEmail}}\",\n  \"age\": 26\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "const user = pm.response.json().data;",
+                  "pm.test(\"Name and age replaced\", () => { pm.expect(user.name).to.eql(\"Loujein F.\"); pm.expect(user.age).to.eql(26); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Update the age only (PATCH)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "{{userId}}"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"age\": 27\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "const user = pm.response.json().data;",
+                  "pm.test(\"Age updated\", () => pm.expect(user.age).to.eql(27));",
+                  "pm.test(\"Name unchanged\", () => pm.expect(user.name).to.eql(\"Loujein F.\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "PATCH with an empty body → 400",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "{{userId}}"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", () => pm.response.to.have.status(400));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "PUT with missing fields → 400",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "{{userId}}"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"age\": 30\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", () => pm.response.to.have.status(400));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4. Delete (DELETE)",
+      "item": [
+        {
+          "name": "Delete the user",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "{{userId}}"
+              ]
+            },
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 204 No Content\", () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get the deleted user → 404",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "{{userId}}"
+              ]
+            },
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 404\", () => pm.response.to.have.status(404));",
+                  "pm.test(\"Code NOT_FOUND\", () => pm.expect(pm.response.json().error.code).to.eql(\"NOT_FOUND\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete again → 404",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "{{userId}}"
+              ]
+            },
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 404\", () => pm.response.to.have.status(404));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "userId",
+      "value": ""
+    },
+    {
+      "key": "uniqueEmail",
+      "value": ""
+    }
+  ]
+}

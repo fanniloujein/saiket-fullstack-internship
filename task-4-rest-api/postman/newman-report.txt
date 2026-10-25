@@ -1,0 +1,113 @@
+newman
+
+SaiKet Users API
+
+❏ 0. Health
+↳ Health check
+  GET http://localhost:3000/api/health [200 OK, 510B, 37ms]
+  ✓  Status 200
+  ✓  API is ok
+  ✓  Responds in under 1 s
+
+❏ 1. Create (POST)
+↳ Create a user
+  POST http://localhost:3000/api/users [201 Created, 791B, 8ms]
+  ✓  Status 201 Created
+  ✓  Response is JSON
+  ✓  Has an id, name, email, age and dates
+  ✓  Location header points to the new user
+
+↳ Create with invalid data → 400
+  POST http://localhost:3000/api/users [400 Bad Request, 1.06kB, 4ms]
+  ✓  Status 400
+  ✓  Code VALIDATION_ERROR
+  ✓  Lists the 4 invalid fields
+
+↳ Create with missing fields → 400
+  POST http://localhost:3000/api/users [400 Bad Request, 819B, 4ms]
+  ✓  Status 400
+  ✓  email and age are required
+
+↳ Create with an existing email → 409
+  POST http://localhost:3000/api/users [409 Conflict, 762B, 4ms]
+  ✓  Status 409 Conflict
+  ✓  Code CONFLICT
+
+❏ 2. Read (GET)
+↳ List users
+  GET http://localhost:3000/api/users [200 OK, 2.08kB, 3ms]
+  ✓  Status 200
+  ✓  Response is JSON
+  ✓  data is an array
+  ✓  meta has pagination info
+
+↳ Search, filter by age and sort
+  GET http://localhost:3000/api/users?search=a&minAge=20&maxAge=40&sort=-age&limit=3 [200 OK, 1.33kB, 5ms]
+  ✓  Status 200
+  ✓  At most 3 results
+  ✓  Ages between 20 and 40
+  ✓  Sorted by age, oldest first
+
+↳ Get the created user
+  GET http://localhost:3000/api/users/{{userId}} [200 OK, 727B, 4ms]
+  ✓  Status 200
+  ✓  Same id
+  ✓  Email saved in lowercase
+
+↳ Invalid query → 400
+  GET http://localhost:3000/api/users?limit=1000&sort=password [400 Bad Request, 914B, 6ms]
+  ✓  Status 400
+
+❏ 3. Update (PUT / PATCH)
+↳ Replace the user (PUT)
+  PUT http://localhost:3000/api/users/{{userId}} [200 OK, 724B, 4ms]
+  ✓  Status 200
+  ✓  Name and age replaced
+
+↳ Update the age only (PATCH)
+  PATCH http://localhost:3000/api/users/{{userId}} [200 OK, 724B, 3ms]
+  ✓  Status 200
+  ✓  Age updated
+  ✓  Name unchanged
+
+↳ PATCH with an empty body → 400
+  PATCH http://localhost:3000/api/users/{{userId}} [400 Bad Request, 681B, 3ms]
+  ✓  Status 400
+
+↳ PUT with missing fields → 400
+  PUT http://localhost:3000/api/users/{{userId}} [400 Bad Request, 820B, 4ms]
+  ✓  Status 400
+
+❏ 4. Delete (DELETE)
+↳ Delete the user
+  DELETE http://localhost:3000/api/users/{{userId}} [204 No Content, 373B, 2ms]
+  ✓  Status 204 No Content
+
+↳ Get the deleted user → 404
+  GET http://localhost:3000/api/users/{{userId}} [404 Not Found, 670B, 3ms]
+  ✓  Status 404
+  ✓  Code NOT_FOUND
+
+↳ Delete again → 404
+  DELETE http://localhost:3000/api/users/{{userId}} [404 Not Found, 670B, 2ms]
+  ✓  Status 404
+
+┌─────────────────────────┬─────────────────┬─────────────────┐
+│                         │        executed │          failed │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              iterations │               1 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│                requests │              16 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│            test-scripts │              16 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│      prerequest-scripts │               1 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              assertions │              37 │               0 │
+├─────────────────────────┴─────────────────┴─────────────────┤
+│ total run duration: 416ms                                   │
+├─────────────────────────────────────────────────────────────┤
+│ total data received: 6.02kB (approx)                        │
+├─────────────────────────────────────────────────────────────┤
+│ average response time: 6ms [min: 2ms, max: 37ms, s.d.: 8ms] │
+└─────────────────────────────────────────────────────────────┘

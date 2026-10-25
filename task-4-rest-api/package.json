@@ -1,0 +1,23 @@
+{
+  "name": "saiket-users-api",
+  "version": "1.0.0",
+  "description": "REST API for a User entity with Node.js and Express (SaiKet Systems, Task 4).",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test \"tests/**/*.test.js\"",
+    "test:postman": "newman run postman/SaiKet-Users-API.postman_collection.json -e postman/local.postman_environment.json"
+  },
+  "dependencies": {
+    "express": "^5.3.0"
+  },
+  "devDependencies": {
+    "newman": "^6.2.3",
+    "supertest": "^7.3.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

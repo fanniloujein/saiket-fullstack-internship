@@ -9,7 +9,7 @@ This repository holds my work for the SaiKet Systems Full Stack Development inte
 | 1 | Static Portfolio Website with a Theme | [`task-1-portfolio`](task-1-portfolio) | HTML · Tailwind CSS · JavaScript | ✅ Done |
 | 2 | Responsive Web Page (e-commerce landing) | [`task-2-ecommerce-landing`](task-2-ecommerce-landing) | HTML · CSS · Bootstrap 5 · JavaScript | ✅ Done |
 | 3 | Front-End Framework Basics (to-do app) | [`task-3-react-todo`](task-3-react-todo) | React 19 · Vite · Vitest | ✅ Done |
-| 4 | Basic REST API (Users CRUD) | `task-4-…` | Node.js · Express · Postman | ⏳ Upcoming |
+| 4 | Basic REST API (Users CRUD) | [`task-4-rest-api`](task-4-rest-api) | Node.js · Express 5 · Postman | ✅ Done |
 | 5 | Database Integration | `task-5-…` | SQL · PostgreSQL / MySQL | ⏳ Upcoming |
 | 6 | Full Stack Application (User Management) | `task-6-…` | Front-end + API + database | ⏳ Upcoming |
 
@@ -37,9 +37,17 @@ A to-do list where every completed task grows a flower in an animated garden. Yo
 
 Details: [task-3-react-todo/README.md](task-3-react-todo/README.md)
 
+## Task 4: Users REST API
+
+A CRUD API for a `User` entity (name, email, age) built with Node.js and Express 5. It has hand-written validation, correct status codes (201, 204, 400, 404, 409, 415), and search, filtering, sorting and pagination. It comes with a **Postman collection (37 assertions)**, 15 automated tests and an API explorer page.
+
+![Task 4 preview](task-4-rest-api/screenshots/explorer-create.png)
+
+Details: [task-4-rest-api/README.md](task-4-rest-api/README.md)
+
 ## How to view
 
-Tasks 1 and 2 are static sites: open their `index.html` in a browser. Task 3 is a React app: `npm install && npm run dev` in its folder.
+Tasks 1 and 2 are static sites: open their `index.html` in a browser. Task 3 is a React app: run `npm install && npm run dev` in its folder. Task 4 is an API: run `npm install && npm start` in its folder.
 
 Once GitHub Pages is enabled for this repository, the live version is at
 `https://fanniloujein.github.io/saiket-fullstack-internship/task-1-portfolio/`.
