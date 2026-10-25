@@ -6,6 +6,8 @@
 >
 > 🇬🇧 A "Rhythm of the Day" portfolio: the site theme follows the visitor's real local time (Dawn, Day, Dusk, Night) while a sun or moon moves across the sky.
 
+**🌐 Live demo:** https://loujein-portfolio.onrender.com/
+
 ![Dawn theme](screenshots/hero-dawn.png)
 
 ## Requirements checklist
@@ -78,7 +80,7 @@ npx tailwindcss@3 -c tailwind.config.js -i src/input.css -o assets/css/style.css
 
 - [ ] Replace the LinkedIn link (`https://www.linkedin.com/`) in `index.html` with your own profile.
 - [ ] (Optional) Add a Formspree endpoint in `assets/js/main.js` to receive messages.
-- [ ] Deploy it for free with GitHub Pages, Netlify or Vercel by pointing it at this folder.
+- [x] Deployed on Render: https://loujein-portfolio.onrender.com/
 
 ## Screenshots
 

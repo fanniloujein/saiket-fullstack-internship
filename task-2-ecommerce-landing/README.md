@@ -6,6 +6,8 @@
 >
 > 🇬🇧 **Fakhar** (Arabic for "pottery") is a landing page for a fictional handmade-ceramics shop from Nabeul, Tunisia, built with **Bootstrap 5** and **vanilla JavaScript**.
 
+**🌐 Live demo:** https://saiket-fullstack-internship.onrender.com/
+
 ![Hero](screenshots/hero.png)
 
 ## Requirements checklist

@@ -17,6 +17,8 @@ This repository holds my work for the SaiKet Systems Full Stack Development inte
 
 | Task | Live link |
 |---|---|
+| 1 · Portfolio | https://loujein-portfolio.onrender.com/ |
+| 2 · Fakhar (e-commerce) | https://saiket-fullstack-internship.onrender.com/ |
 | 3 · Bloom (React) | https://task-3-react-todo.onrender.com/ |
 | 4 · Users REST API | https://npm-install-nyfu.onrender.com/ |
 | 5 · API + PostgreSQL | https://saiket-users-postgres.onrender.com/ |
@@ -76,8 +78,7 @@ Details: [task-6-fullstack-app/README.md](task-6-fullstack-app/README.md)
 
 Tasks 1 and 2 are static sites: open their `index.html` in a browser. Task 3 is a React app: run `npm install && npm run dev` in its folder. Task 4 is an API: run `npm install && npm start` in its folder. Tasks 5 and 6 need PostgreSQL too: see their READMEs.
 
-Once GitHub Pages is enabled for this repository, the live version is at
-`https://fanniloujein.github.io/saiket-fullstack-internship/task-1-portfolio/`.
+Every task is also online: see the **Live demos** table at the top.
 
 ---
 
