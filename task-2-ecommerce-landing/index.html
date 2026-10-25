@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="fr" data-bs-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fakhar — Céramique artisanale de Nabeul</title>
+  <meta name="description" content="Fakhar : assiettes, bols, vases et tajines peints à la main à Nabeul. Livraison partout en Tunisie, paiement à la livraison." />
+  <meta name="theme-color" content="#c2562f" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23c2562f'/%3E%3Ccircle cx='32' cy='32' r='22' fill='%23f6eee1'/%3E%3Ccircle cx='32' cy='32' r='8' fill='%231f4e8c'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <script>
+    // Apply the saved colour mode before first paint
+    (function () {
+      var mode = null;
+      try { mode = localStorage.getItem("fk-theme"); } catch (e) {}
+      if (!mode) mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-bs-theme", mode);
+    })();
+  </script>
+</head>
+
+<body>
+  <!-- SVG icons -->
+  <svg width="0" height="0" class="position-absolute" aria-hidden="true">
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18m-5 4a4 4 0 0 1-8 0"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24"><path d="M18 11V6a2 2 0 0 0-4 0v5m0-1V4a2 2 0 0 0-4 0v2m0 4.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2m10 0H9m10 0h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol>
+    <symbol id="i-cash" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></symbol>
+    <symbol id="i-return" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18m-2 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.06 12.35a1 1 0 0 1 0-.7 10.75 10.75 0 0 1 19.88 0 1 1 0 0 1 0 .7 10.75 10.75 0 0 1-19.88 0"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><path d="M12.59 2.59A2 2 0 0 0 11.17 2H4a2 2 0 0 0-2 2v7.17a2 2 0 0 0 .59 1.42l8.7 8.7a2.43 2.43 0 0 0 3.42 0l6.58-6.58a2.43 2.43 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></symbol>
+  </svg>
+
+  <a href="#main" class="visually-hidden-focusable position-absolute top-0 start-0 m-2 btn btn-light z-3">Aller au contenu</a>
+
+  <!-- ============ ANNOUNCEMENT BAR + COUNTDOWN ============ -->
+  <div class="announce text-center small py-2 px-3">
+    <span class="fw-semibold">Soldes d'automne : -15 % avec le code <button type="button" class="code-chip" data-copy="FAKHAR15" title="Copier le code">FAKHAR15</button></span>
+    <span class="d-none d-md-inline">· Se termine dans</span>
+    <span id="countdown" class="countdown d-inline-flex gap-1 ms-1" aria-live="off">
+      <span><b data-unit="d">00</b>j</span><span><b data-unit="h">00</b>h</span><span><b data-unit="m">00</b>m</span><span><b data-unit="s">00</b>s</span>
+    </span>
+  </div>
+
+  <!-- ============ NAVBAR ============ -->
+  <nav class="navbar navbar-expand-lg sticky-top site-nav" aria-label="Navigation principale">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#top">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span><span class="brand-name">Fakhar</span><span class="brand-ar ms-2 d-none d-sm-inline" lang="ar">فخّار</span></span>
+      </a>
+
+      <div class="d-flex align-items-center gap-1 order-lg-last">
+        <button id="theme-toggle" class="btn btn-icon" type="button" aria-label="Activer le mode sombre">
+          <svg class="ic"><use href="#i-moon"/></svg>
+        </button>
+        <a href="#collection" class="btn btn-icon position-relative" id="wishlist-link" aria-label="Favoris">
+          <svg class="ic"><use href="#i-heart"/></svg>
+          <span id="wish-count" class="count-badge d-none">0</span>
+        </a>
+        <button class="btn btn-icon position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#cart" aria-controls="cart" aria-label="Ouvrir le panier">
+          <svg class="ic"><use href="#i-bag"/></svg>
+          <span id="cart-count" class="count-badge d-none">0</span>
+        </button>
+        <button class="navbar-toggler border-0 ms-1" type="button" data-bs-toggle="collapse" data-bs-target="#nav-menu" aria-controls="nav-menu" aria-expanded="false" aria-label="Menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+      <div class="collapse navbar-collapse" id="nav-menu">
+        <ul class="navbar-nav mx-auto gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="#collection">Collection</a></li>
+          <li class="nav-item"><a class="nav-link" href="#atelier">L'atelier</a></li>
+          <li class="nav-item"><a class="nav-link" href="#avis">Avis</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <header id="top" class="hero position-relative overflow-hidden">
+      <div class="zellige" aria-hidden="true"></div>
+      <div class="container position-relative py-5">
+        <div class="row align-items-center g-5 py-lg-4">
+          <div class="col-lg-6">
+            <span class="eyebrow">Fait main à Nabeul · depuis 1984</span>
+            <h1 class="display-title mt-3">L'argile de Nabeul, <em>peinte à la main</em> pour votre table.</h1>
+            <p class="lead text-body-secondary mt-3">Assiettes, bols, vases et tajines tournés puis peints au pinceau par nos artisanes et artisans. Chaque pièce est unique, livrée partout en Tunisie.</p>
+            <div class="d-flex flex-wrap gap-2 mt-4">
+              <a href="#collection" class="btn btn-clay btn-lg">Découvrir la collection <svg class="ic ic-sm ms-1"><use href="#i-arrow"/></svg></a>
+              <a href="#atelier" class="btn btn-outline-clay btn-lg">Notre atelier</a>
+            </div>
+            <div class="d-flex gap-4 mt-4 pt-2 hero-stats">
+              <div><strong>4,8/5</strong><span>2 300 avis</span></div>
+              <div><strong>48 h</strong><span>livraison</span></div>
+              <div><strong>100 %</strong><span>fait main</span></div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="hero-visual mx-auto">
+              <div id="hero-plate" class="hero-plate"></div>
+              <div class="float-card fc-1 shadow-sm"><svg class="ic text-warning"><use href="#i-star"/></svg> <span><b>« Sublime ! »</b><br /><small class="text-body-secondary">Amira, Sfax</small></span></div>
+              <div class="float-card fc-2 shadow-sm"><span class="dot-live"></span> <span><b>Pièce unique</b><br /><small class="text-body-secondary">peinte par Fatma</small></span></div>
+              <div class="hero-swatches" role="group" aria-label="Changer la couleur de l'assiette">
+                <button class="swatch active" data-hero="0" style="--a:#1f4e8c" aria-label="Bleu de Nabeul"></button>
+                <button class="swatch" data-hero="1" style="--a:#c2562f" aria-label="Terracotta"></button>
+                <button class="swatch" data-hero="2" style="--a:#5f7a35" aria-label="Vert olive"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ TRUST STRIP ============ -->
+    <section class="trust border-top border-bottom" aria-label="Nos engagements">
+      <div class="container">
+        <div class="row row-cols-2 row-cols-md-4 g-3 py-4 text-center text-md-start">
+          <div class="col d-md-flex align-items-center gap-3"><span class="trust-ic"><svg class="ic"><use href="#i-hand"/></svg></span><div><b>Fait main</b><small class="d-block text-body-secondary">par des artisans de Nabeul</small></div></div>
+          <div class="col d-md-flex align-items-center gap-3"><span class="trust-ic"><svg class="ic"><use href="#i-truck"/></svg></span><div><b>Livraison 48 h</b><small class="d-block text-body-secondary">offerte dès 150 DT</small></div></div>
+          <div class="col d-md-flex align-items-center gap-3"><span class="trust-ic"><svg class="ic"><use href="#i-cash"/></svg></span><div><b>Paiement à la livraison</b><small class="d-block text-body-secondary">partout en Tunisie</small></div></div>
+          <div class="col d-md-flex align-items-center gap-3"><span class="trust-ic"><svg class="ic"><use href="#i-return"/></svg></span><div><b>Casse remboursée</b><small class="d-block text-body-secondary">emballage renforcé</small></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COLLECTION ============ -->
+    <section id="collection" class="section">
+      <div class="container">
+        <div class="text-center mb-4">
+          <span class="eyebrow">La collection</span>
+          <h2 class="section-title mt-2">Des pièces pour chaque moment</h2>
+          <p class="text-body-secondary mx-auto" style="max-width:36rem">Du café du matin au couscous du vendredi. Cliquez sur une pièce pour la voir de plus près et choisir sa couleur.</p>
+        </div>
+
+        <!-- Toolbar: filters + search + sort -->
+        <div class="toolbar d-flex flex-column flex-lg-row gap-3 align-items-lg-center justify-content-between mb-4">
+          <div id="filters" class="d-flex flex-wrap gap-2" role="group" aria-label="Filtrer par catégorie"></div>
+          <div class="d-flex gap-2">
+            <div class="search-box position-relative flex-grow-1">
+              <svg class="ic ic-sm search-ic"><use href="#i-search"/></svg>
+              <input id="search" type="search" class="form-control" placeholder="Rechercher…" aria-label="Rechercher un produit" />
+            </div>
+            <select id="sort" class="form-select w-auto" aria-label="Trier les produits">
+              <option value="popular">Populaires</option>
+              <option value="new">Nouveautés</option>
+              <option value="price-asc">Prix croissant</option>
+              <option value="price-desc">Prix décroissant</option>
+              <option value="rating">Mieux notés</option>
+            </select>
+          </div>
+        </div>
+
+        <p id="result-info" class="small text-body-secondary mb-3" aria-live="polite"></p>
+        <div id="products" class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4"></div>
+        <div id="empty" class="text-center py-5 d-none">
+          <p class="fs-5 mb-2">Aucune pièce ne correspond à votre recherche.</p>
+          <button id="reset-filters" class="btn btn-outline-clay">Réinitialiser les filtres</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ATELIER (process) ============ -->
+    <section id="atelier" class="section section-alt">
+      <div class="container">
+        <div class="row g-5 align-items-center">
+          <div class="col-lg-5">
+            <span class="eyebrow">L'atelier</span>
+            <h2 class="section-title mt-2">De la terre au four, quatre gestes</h2>
+            <p class="text-body-secondary">À Nabeul, la poterie est un savoir-faire transmis de génération en génération. Chaque pièce Fakhar passe entre les mains de trois artisans avant d'arriver chez vous.</p>
+            <div class="progress-steps mt-4">
+              <div class="d-flex justify-content-between small fw-semibold"><span>Temps de fabrication d'une assiette</span><span>~ 6 jours</span></div>
+              <div class="progress mt-2" role="progressbar" aria-label="Temps de fabrication" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="height:.6rem"><div class="progress-bar bg-clay" style="width:100%"></div></div>
+            </div>
+          </div>
+          <div class="col-lg-7">
+            <div class="row row-cols-1 row-cols-sm-2 g-3">
+              <div class="col"><div class="step-card h-100"><span class="step-num">01</span><h3 class="h5 mt-3">Tournage</h3><p class="small text-body-secondary mb-0">L'argile rouge de la région est tournée au tour de potier, puis séchée à l'ombre.</p></div></div>
+              <div class="col"><div class="step-card h-100"><span class="step-num">02</span><h3 class="h5 mt-3">Première cuisson</h3><p class="small text-body-secondary mb-0">Cuisson du biscuit à 980 °C pour rendre la pièce solide.</p></div></div>
+              <div class="col"><div class="step-card h-100"><span class="step-num">03</span><h3 class="h5 mt-3">Peinture</h3><p class="small text-body-secondary mb-0">Motifs peints à main levée : jasmin, étoiles, vagues, inspirés de la médina.</p></div></div>
+              <div class="col"><div class="step-card h-100"><span class="step-num">04</span><h3 class="h5 mt-3">Émaillage</h3><p class="small text-body-secondary mb-0">Émail sans plomb et seconde cuisson : les couleurs deviennent brillantes et durables.</p></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TESTIMONIALS (Bootstrap carousel) ============ -->
+    <section id="avis" class="section">
+      <div class="container">
+        <div class="text-center mb-4">
+          <span class="eyebrow">Avis clients</span>
+          <h2 class="section-title mt-2">Elles et ils ont dressé leur table</h2>
+        </div>
+        <div id="reviews" class="carousel slide mx-auto" data-bs-ride="carousel" style="max-width:46rem">
+          <div class="carousel-indicators position-static mb-0 mt-3 order-last">
+            <button type="button" data-bs-target="#reviews" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Avis 1"></button>
+            <button type="button" data-bs-target="#reviews" data-bs-slide-to="1" aria-label="Avis 2"></button>
+            <button type="button" data-bs-target="#reviews" data-bs-slide-to="2" aria-label="Avis 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <figure class="carousel-item active review-card text-center">
+              <div class="stars" aria-label="5 étoiles sur 5">★★★★★</div>
+              <blockquote class="fs-5 mt-3">« J'ai offert le service « Jasmin » à ma mère pour l'Aïd : elle n'arrête pas d'en parler. L'emballage était parfait, rien de cassé. »</blockquote>
+              <figcaption class="mt-3"><b>Amira B.</b> · <span class="text-body-secondary">Sfax</span></figcaption>
+            </figure>
+            <figure class="carousel-item review-card text-center">
+              <div class="stars" aria-label="5 étoiles sur 5">★★★★★</div>
+              <blockquote class="fs-5 mt-3">« Le tajine Cap Bon est magnifique sur la table. Livré en deux jours à Bizerte et payé à la livraison, très pratique. »</blockquote>
+              <figcaption class="mt-3"><b>Yassine K.</b> · <span class="text-body-secondary">Bizerte</span></figcaption>
+            </figure>
+            <figure class="carousel-item review-card text-center">
+              <div class="stars" aria-label="4 étoiles sur 5">★★★★☆</div>
+              <blockquote class="fs-5 mt-3">« Les bols Sidi Bou sont encore plus beaux en vrai. Je retire une étoile parce que je veux déjà toute la collection ! »</blockquote>
+              <figcaption class="mt-3"><b>Salma T.</b> · <span class="text-body-secondary">Tunis</span></figcaption>
+            </figure>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#reviews" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Précédent</span></button>
+          <button class="carousel-control-next" type="button" data-bs-target="#reviews" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Suivant</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ (Bootstrap accordion) ============ -->
+    <section id="faq" class="section section-alt">
+      <div class="container" style="max-width:48rem">
+        <div class="text-center mb-4">
+          <span class="eyebrow">FAQ</span>
+          <h2 class="section-title mt-2">Questions fréquentes</h2>
+        </div>
+        <div class="accordion" id="faq-list">
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q1" aria-expanded="true" aria-controls="q1">Combien coûte la livraison ?</button></h3>
+            <div id="q1" class="accordion-collapse collapse show" data-bs-parent="#faq-list"><div class="accordion-body">8 DT partout en Tunisie, offerte dès 150 DT d'achat. Livraison en 48 h dans le Grand Tunis, 72 h ailleurs.</div></div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q2" aria-expanded="false" aria-controls="q2">Et si une pièce arrive cassée ?</button></h3>
+            <div id="q2" class="accordion-collapse collapse" data-bs-parent="#faq-list"><div class="accordion-body">Envoyez-nous une photo dans les 48 h : nous la remplaçons ou la remboursons, sans frais.</div></div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q3" aria-expanded="false" aria-controls="q3">Les pièces vont-elles au lave-vaisselle ?</button></h3>
+            <div id="q3" class="accordion-collapse collapse" data-bs-parent="#faq-list"><div class="accordion-body">Oui pour les assiettes, bols et tasses (émail sans plomb). Les tajines de service et les vases se lavent à la main.</div></div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q4" aria-expanded="false" aria-controls="q4">Puis-je commander pour un mariage ou une entreprise ?</button></h3>
+            <div id="q4" class="accordion-collapse collapse" data-bs-parent="#faq-list"><div class="accordion-body">Bien sûr : nous réalisons des séries personnalisées (prénoms, logo, couleurs). Inscrivez-vous à la newsletter ci-dessous et nous vous recontactons.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ NEWSLETTER ============ -->
+    <section class="section newsletter">
+      <div class="container">
+        <div class="news-card mx-auto text-center">
+          <h2 class="section-title text-white">-10 % sur votre première commande</h2>
+          <p class="text-white-50 mb-4">Nouvelles pièces, coulisses de l'atelier et ventes privées, une fois par mois.</p>
+          <form id="news-form" class="row g-2 justify-content-center" novalidate>
+            <div class="col-12 col-md-7 text-start">
+              <label for="news-email" class="visually-hidden">Adresse e-mail</label>
+              <input id="news-email" type="email" class="form-control form-control-lg" placeholder="votre@email.com" aria-describedby="news-error" required />
+              <div id="news-error" class="invalid-feedback text-warning-emphasis"></div>
+            </div>
+            <div class="col-12 col-md-auto">
+              <button class="btn btn-light btn-lg w-100 fw-semibold" type="submit">Je m'inscris</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer py-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-5">
+          <a class="d-flex align-items-center gap-2 text-decoration-none" href="#top"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Fakhar</span></a>
+          <p class="small text-body-secondary mt-3 mb-0">Céramique artisanale de Nabeul, peinte à la main.</p>
+        </div>
+        <div class="col-6 col-md-3">
+          <h3 class="h6">Boutique</h3>
+          <ul class="list-unstyled small">
+            <li><a href="#collection" data-filter-link="assiettes">Assiettes & plats</a></li>
+            <li><a href="#collection" data-filter-link="bols">Bols</a></li>
+            <li><a href="#collection" data-filter-link="vases">Vases</a></li>
+            <li><a href="#collection" data-filter-link="tajines">Tajines</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-4">
+          <h3 class="h6">Aide</h3>
+          <ul class="list-unstyled small">
+            <li><a href="#faq">Livraison & retours</a></li>
+            <li><a href="#faq">Entretien des pièces</a></li>
+            <li><a href="#atelier">Notre atelier</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr />
+      <p class="small text-body-secondary mb-0 d-flex flex-column flex-md-row justify-content-between gap-2">
+        <span>© <span id="year">2026</span> Fakhar · Projet de démonstration réalisé par Loujein Fanni (SaiKet Systems, Task 2). Boutique fictive.</span>
+        <span>HTML · CSS · Bootstrap 5 · JavaScript natif</span>
+      </p>
+    </div>
+  </footer>
+
+  <!-- ============ CART (Bootstrap offcanvas) ============ -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="cart" aria-labelledby="cart-title">
+    <div class="offcanvas-header border-bottom">
+      <h2 class="offcanvas-title h5" id="cart-title">Votre panier</h2>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fermer"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column p-0">
+      <div class="p-3 border-bottom">
+        <p id="ship-msg" class="small mb-2"></p>
+        <div class="progress" style="height:.5rem" role="progressbar" aria-label="Progression vers la livraison offerte"><div id="ship-bar" class="progress-bar bg-clay" style="width:0%"></div></div>
+      </div>
+      <ul id="cart-items" class="list-unstyled flex-grow-1 overflow-auto p-3 mb-0"></ul>
+      <div id="cart-empty" class="flex-grow-1 d-flex flex-column align-items-center justify-content-center text-center p-4 d-none">
+        <svg class="ic text-body-tertiary" style="width:3rem;height:3rem"><use href="#i-bag"/></svg>
+        <p class="mt-3 mb-3">Votre panier est vide.</p>
+        <button class="btn btn-clay" data-bs-dismiss="offcanvas">Voir la collection</button>
+      </div>
+      <div id="cart-footer" class="border-top p-3">
+        <form id="promo-form" class="input-group input-group-sm mb-1" novalidate>
+          <span class="input-group-text"><svg class="ic ic-sm"><use href="#i-tag"/></svg></span>
+          <input id="promo-input" class="form-control" placeholder="Code promo" aria-label="Code promo" aria-describedby="promo-msg" />
+          <button class="btn btn-outline-clay" type="submit">Appliquer</button>
+        </form>
+        <p id="promo-msg" class="small mb-2" aria-live="polite"></p>
+        <dl class="totals small mb-3">
+          <div><dt>Sous-total</dt><dd id="t-sub">0,000 DT</dd></div>
+          <div id="t-discount-row" class="d-none text-success"><dt>Remise <span id="t-code"></span></dt><dd id="t-discount">0</dd></div>
+          <div><dt>Livraison</dt><dd id="t-ship">8,000 DT</dd></div>
+          <div class="fs-6 fw-bold border-top pt-2 mt-2"><dt>Total</dt><dd id="t-total">0,000 DT</dd></div>
+        </dl>
+        <button id="checkout-btn" class="btn btn-clay w-100 btn-lg" data-bs-toggle="modal" data-bs-target="#checkout">Commander</button>
+        <p class="small text-body-secondary text-center mt-2 mb-0">Paiement à la livraison</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ QUICK VIEW (Bootstrap modal) ============ -->
+  <div class="modal fade" id="quickview" tabindex="-1" aria-labelledby="qv-title" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content overflow-hidden">
+        <div class="row g-0">
+          <div class="col-md-6 qv-visual d-flex align-items-center justify-content-center p-4"><div id="qv-img" class="w-100"></div></div>
+          <div class="col-md-6 p-4">
+            <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            <p id="qv-cat" class="eyebrow mb-2"></p>
+            <h2 id="qv-title" class="h3 serif"></h2>
+            <div id="qv-rating" class="small text-body-secondary"></div>
+            <p id="qv-price" class="fs-4 fw-bold mt-2 mb-3"></p>
+            <p id="qv-desc" class="text-body-secondary"></p>
+            <p class="small fw-semibold mb-2">Couleur : <span id="qv-color-name" class="fw-normal"></span></p>
+            <div id="qv-colors" class="d-flex gap-2 mb-4" role="radiogroup" aria-label="Couleur"></div>
+            <div class="d-flex gap-2">
+              <div class="qty input-group" style="width:8.5rem">
+                <button class="btn btn-outline-secondary" type="button" id="qv-minus" aria-label="Diminuer la quantité"><svg class="ic ic-sm"><use href="#i-minus"/></svg></button>
+                <input id="qv-qty" type="text" inputmode="numeric" class="form-control text-center" value="1" aria-label="Quantité" />
+                <button class="btn btn-outline-secondary" type="button" id="qv-plus" aria-label="Augmenter la quantité"><svg class="ic ic-sm"><use href="#i-plus"/></svg></button>
+              </div>
+              <button id="qv-add" class="btn btn-clay flex-grow-1">Ajouter au panier</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ CHECKOUT (Bootstrap modal + JS validation) ============ -->
+  <div class="modal fade" id="checkout" tabindex="-1" aria-labelledby="co-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <form id="checkout-form" novalidate>
+          <div class="modal-header">
+            <h2 class="modal-title h5" id="co-title">Livraison · paiement à la livraison</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="co-name" class="form-label">Nom et prénom *</label>
+              <input id="co-name" name="name" class="form-control" autocomplete="name" aria-describedby="co-name-err" />
+              <div id="co-name-err" class="invalid-feedback"></div>
+            </div>
+            <div class="mb-3">
+              <label for="co-phone" class="form-label">Téléphone *</label>
+              <div class="input-group has-validation">
+                <span class="input-group-text">+216</span>
+                <input id="co-phone" name="phone" class="form-control" inputmode="tel" autocomplete="tel-national" placeholder="20 123 456" aria-describedby="co-phone-err" />
+                <div id="co-phone-err" class="invalid-feedback"></div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="co-city" class="form-label">Gouvernorat *</label>
+              <select id="co-city" name="city" class="form-select" aria-describedby="co-city-err">
+                <option value="">Choisir…</option>
+                <option>Tunis</option><option>Ariana</option><option>Ben Arous</option><option>Manouba</option><option>Nabeul</option><option>Bizerte</option><option>Sousse</option><option>Monastir</option><option>Mahdia</option><option>Sfax</option><option>Kairouan</option><option>Gabès</option><option>Médenine</option><option>Tozeur</option><option>Autre</option>
+              </select>
+              <div id="co-city-err" class="invalid-feedback"></div>
+            </div>
+            <div class="mb-1">
+              <label for="co-address" class="form-label">Adresse *</label>
+              <textarea id="co-address" name="address" rows="2" class="form-control" autocomplete="street-address" aria-describedby="co-address-err"></textarea>
+              <div id="co-address-err" class="invalid-feedback"></div>
+            </div>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <span class="fw-bold">Total : <span id="co-total"></span></span>
+            <button type="submit" class="btn btn-clay">Confirmer la commande</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TOAST ============ -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="toast" class="toast align-items-center border-0" role="status" aria-live="polite" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body d-flex align-items-center gap-2"><svg class="ic text-success" id="toast-ic"><use href="#i-check"/></svg><span id="toast-text"></span></div>
+        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Fermer"></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/products.js"></script>
+  <script src="assets/js/ceramics.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

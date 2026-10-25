@@ -7,7 +7,7 @@ This repository holds my work for the SaiKet Systems Full Stack Development inte
 | # | Task | Folder | Stack | Status |
 |---|---|---|---|---|
 | 1 | Static Portfolio Website with a Theme | [`task-1-portfolio`](task-1-portfolio) | HTML · Tailwind CSS · JavaScript | ✅ Done |
-| 2 | Responsive Web Page (e-commerce landing) | `task-2-…` | HTML · CSS · Tailwind/Bootstrap · JS | ⏳ Upcoming |
+| 2 | Responsive Web Page (e-commerce landing) | [`task-2-ecommerce-landing`](task-2-ecommerce-landing) | HTML · CSS · Bootstrap 5 · JavaScript | ✅ Done |
 | 3 | Front-End Framework Basics (to-do app) | `task-3-…` | React | ⏳ Upcoming |
 | 4 | Basic REST API (Users CRUD) | `task-4-…` | Node.js · Express · Postman | ⏳ Upcoming |
 | 5 | Database Integration | `task-5-…` | SQL · PostgreSQL / MySQL | ⏳ Upcoming |
@@ -20,6 +20,14 @@ A portfolio whose theme follows the visitor's real local time (dawn, day, dusk, 
 ![Task 1 preview](task-1-portfolio/screenshots/hero-dawn.png)
 
 Details: [task-1-portfolio/README.md](task-1-portfolio/README.md)
+
+## Task 2: "Fakhar" e-commerce landing page
+
+A responsive landing page for a fictional handmade-ceramics shop from Nabeul. It has filters, search and sorting, a quick view with colour variants, a cart with a promo code and a free-shipping bar, a checkout validated in JavaScript, and a dark mode. It is built with Bootstrap 5 and vanilla JS.
+
+![Task 2 preview](task-2-ecommerce-landing/screenshots/hero.png)
+
+Details: [task-2-ecommerce-landing/README.md](task-2-ecommerce-landing/README.md)
 
 ## How to view
 
