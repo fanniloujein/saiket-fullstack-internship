@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SaiKet Users API — PostgreSQL</title>
+  <meta name="description" content="Users REST API with Node.js, Express and PostgreSQL. Try every endpoint and see the SQL it runs." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2310b981'/%3E%3Ctext x='32' y='42' font-family='monospace' font-weight='700' font-size='26' fill='%23052e1f' text-anchor='middle'%3E%7B%7D%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-inner">
+      <div class="logo"><span class="logo-mark">{ }</span><div><strong>SaiKet Users API</strong><small>Node.js · Express · PostgreSQL</small></div></div>
+      <div class="top-right">
+        <span id="health" class="pill"><span class="dot"></span> checking…</span>
+        <a class="pill link" href="/api" target="_blank" rel="noopener">GET /api</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="intro">
+      <h1>Every request, <span class="grad">every SQL query</span></h1>
+      <p>The <code>User</code> API (<code>name</code>, <code>email</code>, <code>age</code>) now stores its data in <b>PostgreSQL</b>. Send a request and see the parameterised SQL that ran, with its values, row count and time.</p>
+    </section>
+
+    <div class="grid">
+      <!-- Endpoint list -->
+      <aside class="panel endpoints" aria-label="Endpoints">
+        <h2>Endpoints</h2>
+        <ul id="endpoint-list"></ul>
+        <h2 class="mt">Status codes</h2>
+        <ul class="codes">
+          <li><b class="s2">200</b> OK</li>
+          <li><b class="s2">201</b> Created + Location</li>
+          <li><b class="s2">204</b> No Content</li>
+          <li><b class="s4">400</b> Validation error</li>
+          <li><b class="s4">404</b> Not found</li>
+          <li><b class="s4">409</b> Email already used</li>
+          <li><b class="s4">415</b> Body is not JSON</li>
+          <li><b class="s5">503</b> Database unreachable</li>
+        </ul>
+      </aside>
+
+      <!-- Request builder -->
+      <section class="panel console" aria-label="Request">
+        <form id="request-form">
+          <div class="req-line">
+            <select id="method" aria-label="HTTP method">
+              <option>GET</option><option>POST</option><option>PUT</option><option>PATCH</option><option>DELETE</option>
+            </select>
+            <input id="path" value="/api/users" aria-label="Path" spellcheck="false" />
+            <button type="submit" class="send">Send <kbd>Ctrl ↵</kbd></button>
+          </div>
+          <label for="body" class="label">JSON body <span id="body-hint" class="muted"></span></label>
+          <textarea id="body" spellcheck="false" rows="7"></textarea>
+          <p id="body-error" class="body-error" role="alert"></p>
+        </form>
+
+        <div class="response" aria-live="polite">
+          <div class="res-head">
+            <span id="res-status" class="status muted">No request yet</span>
+            <span id="res-time" class="muted"></span>
+            <span id="res-location" class="muted mono"></span>
+          </div>
+          <pre id="res-body" class="mono"><span class="muted">// The response will appear here</span></pre>
+          <h3 class="sql-title">SQL executed by PostgreSQL <span id="sql-count" class="badge">0</span></h3>
+          <div id="sql-list" class="sql-list"><p class="muted small">Send a request to see its SQL.</p></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Stats from SQL aggregates -->
+    <section class="panel stats" aria-label="Statistics">
+      <div class="stat"><span class="muted small">Users</span><strong id="st-total">–</strong></div>
+      <div class="stat"><span class="muted small">Average age</span><strong id="st-avg">–</strong></div>
+      <div class="stat"><span class="muted small">Youngest · oldest</span><strong id="st-range">–</strong></div>
+      <div class="stat wide"><span class="muted small">Age brackets (GROUP BY)</span><div id="st-brackets" class="bars"></div></div>
+    </section>
+
+    <!-- Live data -->
+    <section class="panel users" aria-label="Current users">
+      <div class="users-head">
+        <h2>Users in the API <span id="user-total" class="badge">0</span></h2>
+        <p class="muted small">Refreshed after every request · stored in PostgreSQL: the data survives a server restart</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Name</th><th>Email</th><th>Age</th><th>id</th><th></th></tr></thead>
+          <tbody id="user-rows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap foot muted small">SaiKet Systems · Task 5 · Loujein Fanni</footer>
+
+  <script src="explorer.js"></script>
+</body>
+</html>

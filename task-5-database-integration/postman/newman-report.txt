@@ -1,0 +1,125 @@
+newman
+
+SaiKet Users API — PostgreSQL
+
+❏ 0. Health
+↳ Health check
+  GET http://localhost:3000/api/health [200 OK, 666B, 38ms]
+  ✓  Status 200
+  ✓  API is ok
+  ✓  Responds in under 1 s
+  ✓  Database connected
+
+❏ 1. Create (POST)
+↳ Create a user
+  POST http://localhost:3000/api/users [201 Created, 1.15kB, 17ms]
+  ✓  Status 201 Created
+  ✓  Response is JSON
+  ✓  Has an id, name, email, age and dates
+  ✓  Location header points to the new user
+
+↳ Create with invalid data → 400
+  POST http://localhost:3000/api/users [400 Bad Request, 1.08kB, 5ms]
+  ✓  Status 400
+  ✓  Code VALIDATION_ERROR
+  ✓  Lists the 4 invalid fields
+
+↳ Create with missing fields → 400
+  POST http://localhost:3000/api/users [400 Bad Request, 834B, 3ms]
+  ✓  Status 400
+  ✓  email and age are required
+
+↳ Create with an existing email → 409
+  POST http://localhost:3000/api/users [409 Conflict, 777B, 5ms]
+  ✓  Status 409 Conflict
+  ✓  Code CONFLICT
+
+❏ 2. Read (GET)
+↳ List users
+  GET http://localhost:3000/api/users [200 OK, 3.25kB, 17ms]
+  ✓  Status 200
+  ✓  Response is JSON
+  ✓  data is an array
+  ✓  meta has pagination info
+
+↳ Search, filter by age and sort
+  GET http://localhost:3000/api/users?search=a&minAge=20&maxAge=40&sort=-age&limit=3 [200 OK, 2.02kB, 5ms]
+  ✓  Status 200
+  ✓  At most 3 results
+  ✓  Ages between 20 and 40
+  ✓  Sorted by age, oldest first
+
+↳ Statistics (SQL aggregates)
+  GET http://localhost:3000/api/users/stats [200 OK, 2.07kB, 15ms]
+  ✓  Status 200
+  ✓  Has total, average, youngest, oldest
+  ✓  Brackets add up to the total
+
+↳ SQL injection attempt is harmless
+  GET http://localhost:3000/api/users?search=' OR 1=1; DROP TABLE users; -- [200 OK, 1.24kB, 7ms]
+  ✓  Status 200
+  ✓  No user matches the injected text
+
+↳ Get the created user
+  GET http://localhost:3000/api/users/{{userId}} [200 OK, 1kB, 4ms]
+  ✓  Status 200
+  ✓  Same id
+  ✓  Email saved in lowercase
+
+↳ Invalid query → 400
+  GET http://localhost:3000/api/users?limit=1000&sort=password [400 Bad Request, 929B, 3ms]
+  ✓  Status 400
+
+❏ 3. Update (PUT / PATCH)
+↳ Replace the user (PUT)
+  PUT http://localhost:3000/api/users/{{userId}} [200 OK, 1.39kB, 8ms]
+  ✓  Status 200
+  ✓  Name and age replaced
+
+↳ Update the age only (PATCH)
+  PATCH http://localhost:3000/api/users/{{userId}} [200 OK, 1.28kB, 5ms]
+  ✓  Status 200
+  ✓  Age updated
+  ✓  Name unchanged
+
+↳ PATCH with an empty body → 400
+  PATCH http://localhost:3000/api/users/{{userId}} [400 Bad Request, 957B, 3ms]
+  ✓  Status 400
+
+↳ PUT with missing fields → 400
+  PUT http://localhost:3000/api/users/{{userId}} [400 Bad Request, 1.1kB, 4ms]
+  ✓  Status 400
+
+❏ 4. Delete (DELETE)
+↳ Delete the user
+  DELETE http://localhost:3000/api/users/{{userId}} [204 No Content, 582B, 4ms]
+  ✓  Status 204 No Content
+
+↳ Get the deleted user → 404
+  GET http://localhost:3000/api/users/{{userId}} [404 Not Found, 946B, 3ms]
+  ✓  Status 404
+  ✓  Code NOT_FOUND
+
+↳ Delete again → 404
+  DELETE http://localhost:3000/api/users/{{userId}} [404 Not Found, 879B, 2ms]
+  ✓  Status 404
+
+┌─────────────────────────┬─────────────────┬─────────────────┐
+│                         │        executed │          failed │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              iterations │               1 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│                requests │              18 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│            test-scripts │              18 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│      prerequest-scripts │               1 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              assertions │              43 │               0 │
+├─────────────────────────┴─────────────────┴─────────────────┤
+│ total run duration: 461ms                                   │
+├─────────────────────────────────────────────────────────────┤
+│ total data received: 7.46kB (approx)                        │
+├─────────────────────────────────────────────────────────────┤
+│ average response time: 8ms [min: 2ms, max: 38ms, s.d.: 8ms] │
+└─────────────────────────────────────────────────────────────┘

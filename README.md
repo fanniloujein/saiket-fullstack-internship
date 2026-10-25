@@ -10,7 +10,7 @@ This repository holds my work for the SaiKet Systems Full Stack Development inte
 | 2 | Responsive Web Page (e-commerce landing) | [`task-2-ecommerce-landing`](task-2-ecommerce-landing) | HTML · CSS · Bootstrap 5 · JavaScript | ✅ Done |
 | 3 | Front-End Framework Basics (to-do app) | [`task-3-react-todo`](task-3-react-todo) | React 19 · Vite · Vitest | ✅ Done |
 | 4 | Basic REST API (Users CRUD) | [`task-4-rest-api`](task-4-rest-api) | Node.js · Express 5 · Postman | ✅ Done |
-| 5 | Database Integration | `task-5-…` | SQL · PostgreSQL / MySQL | ⏳ Upcoming |
+| 5 | Database Integration | [`task-5-database-integration`](task-5-database-integration) | PostgreSQL · SQL · Express | ✅ Done |
 | 6 | Full Stack Application (User Management) | `task-6-…` | Front-end + API + database | ⏳ Upcoming |
 
 ## Task 1: "Rhythm of the Day" portfolio
@@ -45,9 +45,17 @@ A CRUD API for a `User` entity (name, email, age) built with Node.js and Express
 
 Details: [task-4-rest-api/README.md](task-4-rest-api/README.md)
 
+## Task 5: Database integration (PostgreSQL)
+
+The Task 4 API now stores its users in **PostgreSQL**, using hand-written, parameterised SQL (no ORM). It has constraints (UNIQUE, CHECK), a trigger, indexes, migrations, and statistics computed with COUNT/AVG/GROUP BY. The explorer page shows the SQL executed for every request. It comes with 17 integration tests against a real database and 43 Postman assertions.
+
+![Task 5 preview](task-5-database-integration/screenshots/explorer-select.png)
+
+Details: [task-5-database-integration/README.md](task-5-database-integration/README.md)
+
 ## How to view
 
-Tasks 1 and 2 are static sites: open their `index.html` in a browser. Task 3 is a React app: run `npm install && npm run dev` in its folder. Task 4 is an API: run `npm install && npm start` in its folder.
+Tasks 1 and 2 are static sites: open their `index.html` in a browser. Task 3 is a React app: run `npm install && npm run dev` in its folder. Task 4 is an API: run `npm install && npm start` in its folder. Task 5 needs PostgreSQL too: see its README.
 
 Once GitHub Pages is enabled for this repository, the live version is at
 `https://fanniloujein.github.io/saiket-fullstack-internship/task-1-portfolio/`.
