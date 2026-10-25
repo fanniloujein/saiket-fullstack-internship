@@ -129,14 +129,20 @@ npm run db:reset    # empty the database and recreate the demo accounts
 
 ## Deploy on Render
 
-Render → **New → Blueprint** → choose this repository, with the Blueprint path set to `task-6-fullstack-app/render.yaml`. This creates the PostgreSQL database and the web service:
+Render allows **only one free PostgreSQL database per account**, so the Blueprint does not create one. Use a free [Neon](https://neon.tech) database instead (it does not expire):
+
+1. On Neon, create a project and copy its **connection string** (`postgresql://…neon.tech/neondb?sslmode=require`).
+2. Render → **New → Blueprint** → this repository, with the Blueprint path set to `task-6-fullstack-app/render.yaml`.
+3. When Render asks for `DATABASE_URL`, paste the Neon connection string. `DATABASE_SSL=true` is already set.
+
+At the first start, the tables and the demo accounts are created automatically.
 
 | Field | Value |
 |---|---|
 | Build Command | `npm install --include=dev && npm run build` |
 | Start Command | `npm start` |
 
-> A free Render PostgreSQL database is temporary. For a long-lasting demo, use [Neon](https://neon.tech) (free) and set `DATABASE_URL` with `DATABASE_SSL=true`. In real use, set `SEED_DEMO=false`.
+> In real use, set `SEED_DEMO=false`.
 
 ## Tests
 
